@@ -20,5 +20,9 @@ public class App {
 		for ( Meal meal : diet1.getMeals()) {
 			System.out.println(meal.getName() + " " + meal.getCalories());
 		}
+
+		NutritionFacts apple = new NutritionFacts("Яблоко", 52, 0.3, 0.2, 13.8);
+        apple.print();
+        System.out.println("Калории на 200 грамм: " + apple.getCaloriesForGrams(200));
 	}
 }
