@@ -13,7 +13,20 @@ public class Diet {
 	}
 
 	public void addMeal(Meal meal) {
-		this.meals.add(meal);
+		long sameTypeCount = meals.stream()
+				.filter(m -> m.getType().equalsIgnoreCase(meal.getType()))
+				.count();
+		
+		boolean canAdd = switch (meal.getType().toLowerCase()) {
+			case "завтрак", "обед", "ужин" -> sameTypeCount < 1;
+			case "перекус" -> sameTypeCount < 2;
+			default -> false;
+		};
+		if(!canAdd) {
+			System.out.println("Превышен лимит приемов пищи для типа: " + meal.getType());
+			return;
+		}
+		meals.add(meal);
 	}
 
 	public List<Meal> getMeals() {
@@ -40,6 +53,15 @@ public class Diet {
 		for (Meal m : meals) {
 			System.out.println(m);
 		}
+	}
+	
+	public void printSummary() {
+		for (Meal meal : meals) {
+			System.out.println(meal.toString());
+		}
+		System.out.println("Суммарное КБЖУ: ");
+		NutritionFacts total = getTotalNutrition();
+		System.out.println(total);
 	}
 
 }

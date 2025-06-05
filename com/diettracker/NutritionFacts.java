@@ -55,8 +55,8 @@ public class NutritionFacts {
 	public void add(NutritionFacts other) {
 		this.calories += other.getCalories();
 		this.protein += other.getProtein();
-		this.fats = other.getFats();
-		this.carbs = other.getCarbs();
+		this.fats += other.getFats();
+		this.carbs += other.getCarbs();
 	}
 
 }
