@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package com.diettracker;
+
 import java.util.List;
 
 public class App {
@@ -17,12 +18,11 @@ public class App {
 		diet1.addMeal(dinner);
 
 		System.out.println("Программа запущена!");
-		for ( Meal meal : diet1.getMeals()) {
-			System.out.println(meal.getName() + " " + meal.getCalories());
-		}
-
-		NutritionFacts apple = new NutritionFacts("Яблоко", 52, 0.3, 0.2, 13.8);
-        apple.print();
-        System.out.println("Калории на 200 грамм: " + apple.getCaloriesForGrams(200));
+		
+		System.out.println("---------------------");
+		
+		diet1.printMeals();
+		System.out.println("Суммарное КБЖУ: ");
+		System.out.println(diet1.getTotalNutrition());
 	}
 }

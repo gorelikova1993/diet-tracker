@@ -9,4 +9,5 @@
 
 ## Запуск  
 ```bash
-javac *.java && java App
+javac com/diettracker/*.java
+java com.diettracker.App

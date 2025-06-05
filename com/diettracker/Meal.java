@@ -1,15 +1,16 @@
-import java.util.ArrayList;
+package com.diettracker;
+
 import java.util.List;
 
 public class Meal {
 	private String type; //завтрак, обед, ужин
 	private double calories; //калории
-	private List<String> ingredients; //ингредипенты
+	private List<String> ingredients; //ингредиенты
 	private String name; // название блюда
 	private String description;// рецепт
-	private int fats;
-	private int carbs;
-	private int protein;
+	private double fats;
+	private double carbs;
+	private double protein;
 
 	public Meal(String type, double calories, List<String> ingredients, String name, String description,
 				int fats, int carbs, int protein) {
@@ -62,15 +63,24 @@ public class Meal {
 		return description;
 	}
 
-	public int getFats() {
+	public double getFats() {
 		return fats;
 	}
 
-	public int getCarbs() {
+	public double getCarbs() {
 		return carbs;
 	}
 
-	public int getProtein() {
+	public double getProtein() {
 		return protein;
+	}
+	
+	@Override
+	public String toString() {
+		return name + " (" + type + "): " + calories + " ккал, Б: " + protein + ", Ж: " + fats + ", У: " + carbs;
+	}
+	
+	public NutritionFacts toNutritionFacts() {
+		return new NutritionFacts(name, calories, protein, fats, carbs);
 	}
 }
