@@ -1,8 +1,7 @@
-package com.diettracker;
+package com.example.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DayPlan {
     private List<Meal> meals;

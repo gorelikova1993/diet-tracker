@@ -1,4 +1,4 @@
-package com.diettracker;
+package com.example.model;
 
 import java.util.Objects;
 

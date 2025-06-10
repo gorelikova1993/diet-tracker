@@ -1,6 +1,5 @@
-package com.diettracker;
+package com.example.model;
 
-import java.util.List;
 import java.util.Objects;
 
 public class Meal {
