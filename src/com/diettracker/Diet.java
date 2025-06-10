@@ -2,13 +2,14 @@ package com.diettracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Diet {
 	private String name;
 	private List<Meal> meals;
 
 	public Diet(String name) {
-		this.name = name;
+		this.name = Objects.requireNonNull(name, "Имя диеты не может быть null");
 		this.meals = new ArrayList<>();
 	}
 

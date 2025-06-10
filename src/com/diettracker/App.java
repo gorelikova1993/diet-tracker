@@ -5,35 +5,33 @@ import java.util.Scanner;
 
 public class App {
 	public static void main(String[] args) {
-		Diet diet1 = new Diet("Рацион на 2000 калорий");
-		List<String> ingredientsForMealDiet1 = List.of("Яйцо С0 2 шт", "Форель слабосоленная 75 грамм", "Сыр творожный с зеленью Hohland 30 грамм",
-			"Хлебцы dr.korner гречневые 2 шт", "Итальянская смесь 200 грамм", "половинка огурца");
-		String descriptionForMealDiet1 = "Замороженные овощи высыпаем на сковороду(средний огонь) и накрываем крышкой на 6-8 минут....";
-		Recipe recipe = new Recipe("Омлет с овощами и хлебцы с красной рыбой", ingredientsForMealDiet1, descriptionForMealDiet1);
-		diet1.addMeal(new Meal("Завтрак", 515,  "Омлет с овощами и хлебцы с красной рыбой", recipe,  20,
-			42, 36));
-
-
-		Meal lunch = new Meal("Обед", 465, "Картофель по деревенски с индейкой", 13, 45, 40);
-		diet1.addMeal(lunch);
-		Meal dinner = new Meal("Ужин", 435, "Макароны с броколли и черри", 12, 54, 29);
-		diet1.addMeal(dinner);
-
-		System.out.println("Программа запущена!");
+//		Scanner scanner = new Scanner(System.in);
+//		Meal meal = readMealFromUser(scanner);
+//		diet1.addMeal(meal);
+//		diet1.printSummary();
 		
-		System.out.println("---------------------");
+		// Создаём рацион на день
+		DayPlan mondayPlan = new DayPlan();
 		
-		diet1.printMeals();
-		System.out.println("Суммарное КБЖУ: ");
-		System.out.println(diet1.getTotalNutrition());
+		// Добавим несколько блюд
+		Meal breakfast = new Meal("Завтрак", 350, "Овсянка с бананом", 8, 12, 60);
+		Meal lunch = new Meal("Обед", 600, "Курица с рисом", 35, 20, 50);
+		Meal dinner = new Meal("Ужин", 480, "Творог с ягодами", 28, 15, 25);
 		
-		System.out.println("---------------------");
-		diet1.printSummary();
+		mondayPlan.addMeal(breakfast);
+		mondayPlan.addMeal(lunch);
+		mondayPlan.addMeal(dinner);
 		
-		Scanner scanner = new Scanner(System.in);
-		Meal meal = readMealFromUser(scanner);
-		diet1.addMeal(meal);
-		diet1.printSummary();
+		DayPlan tuesday = new DayPlan();
+		tuesday.addMeal(new Meal("Завтрак", 360, "Яичница", 10, 12, 55));
+		tuesday.addMeal(new Meal("Обед", 620, "Гречка", 33, 14, 45));
+		tuesday.addMeal(new Meal("Ужин", 480, "Творог", 35, 15, 25));
+		
+		MealReplacer.swapMeals(mondayPlan, tuesday, "Завтрак", 100);
+		
+		System.out.println("Понедельник:\n" + mondayPlan);
+		System.out.println("Вторник:\n" + tuesday);
+		
 	}
 	
 	public static Meal readMealFromUser(Scanner scanner) {

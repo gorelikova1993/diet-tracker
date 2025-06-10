@@ -18,15 +18,12 @@
 
 ## Запуск вручную (без Maven)
 ```bash
-javac com/diettracker/*.java
-java com.diettracker.App
-jar cfe diet-tracker.jar com.diettracker.App com/diettracker/*.class
-java -jar diet-tracker.jar
+# Компиляция Java-файлов в папку out/production/diet-tracker
+javac -d out/production/diet-tracker src/com/diettracker/*.java
+
+# Создание JAR-файла с указанием главного класса
+jar cfe diettracker.jar com.diettracker.App -C out/production/diet-tracker com
+
+# Запуск JAR-файла
+java -jar diettracker.jar
 ```
-## Пример ввода
-- Введите название блюда: Макароны с сыром
-- Введите прием пищи (Завтрак, Обед, Ужин, Перекус): Ужин
-- Введите калорийность блюда: 560
-- Введите количество жиров в блюде: 18
-- Введите количество белков в блюде: 20
-- Введите количество углеводов в блюде: 75

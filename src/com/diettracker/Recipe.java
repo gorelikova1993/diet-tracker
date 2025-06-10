@@ -1,6 +1,7 @@
 package com.diettracker;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Recipe {
     private List<String> ingredients; //ингредиенты
@@ -8,7 +9,7 @@ public class Recipe {
     private String name; //название блюда
     
     public Recipe(String name, List<String> ingredients, String description) {
-        this.name = name;
+        this.name = Objects.requireNonNull(name, "Название блюда не может быть null");
         this.description = description;
         this.ingredients = ingredients;
     }

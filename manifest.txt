@@ -1,1 +1,1 @@
-Main-class: com.diettracker.App
+Main-class: src.com.diettracker.App

@@ -1,6 +1,7 @@
 package com.diettracker;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Meal {
 	private String type; //завтрак, обед, ужин
@@ -13,18 +14,18 @@ public class Meal {
 
 	public Meal(String type, double calories, String name, Recipe recipe,
 				double fats, double carbs, double protein) {
-		this.type = type;
+		this.type = Objects.requireNonNull(type, "Вид приема пищи не может быть null");
 		this.calories = calories;
-		this.name = name;
+		this.name = Objects.requireNonNull(name, "Название блюда не может быть null");
 		this.recipe = recipe;
 		this.fats = fats;
 		this.carbs = carbs;
 		this.protein = protein;
 	}
 	public Meal(String type, double calories, String name, double fats, double carbs, double protein) {
-		this.type = type;
+		this.type = Objects.requireNonNull(type, "Вид приема пищи не может быть null");
 		this.calories = calories;
-		this.name = name;
+		this.name = Objects.requireNonNull(name, "Название блюда не может быть null");
 		this.fats = fats;
 		this.carbs = carbs;
 		this.protein = protein;

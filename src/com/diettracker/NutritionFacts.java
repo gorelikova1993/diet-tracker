@@ -1,5 +1,7 @@
 package com.diettracker;
 
+import java.util.Objects;
+
 public class NutritionFacts {
 	private String ingredientName; //apple
 	private double calories; //на 100 грамм
@@ -8,7 +10,7 @@ public class NutritionFacts {
 	private double carbs;// на 100 грамм
 
 	public NutritionFacts(String name, double calories, double protein, double fats, double carbs) {
-		this.ingredientName = name;
+		this.ingredientName = Objects.requireNonNull(name, "Имя набора нутриентов не может быть null");
 		this.calories = calories;
 		this.protein = protein;
 		this.fats = fats;
