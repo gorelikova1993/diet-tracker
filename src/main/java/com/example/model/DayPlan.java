@@ -1,58 +1,89 @@
 package com.example.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DayPlan {
-    private List<Meal> meals;
+    // Мы будем хранить приёмы пищи в виде списка
+    private final List<Meal> meals = new ArrayList<>();
     
-    public DayPlan() {
-        this.meals = new ArrayList<>();
-    }
-    
+    /**
+     * Добавляет приём пищи в рацион дня
+     * @param meal — приём пищи (завтрак, обед и т.д.)
+     */
     public void addMeal(Meal meal) {
         meals.add(meal);
     }
     
+    /**
+     * Возвращает список всех приёмов пищи
+     */
     public List<Meal> getMeals() {
-        return meals;
+        return Collections.unmodifiableList(meals);
     }
     
-    public NutritionFacts calculateTotalNutrition() {
-        double totalCalories = 0;
-        double totalProtein = 0;
-        double totalFats = 0;
-        double totalCarbs = 0;
-        
+    /**
+     * Рассчитывает общее количество калорий за день
+     */
+    public double getTotalCalories() {
+        double total = 0.0;
         for (Meal meal : meals) {
-            NutritionFacts facts = meal.toNutritionFacts(); // используем toNutritionFacts()
-            totalCalories += facts.getCalories();
-            totalProtein += facts.getProtein();
-            totalFats += facts.getFats();
-            totalCarbs += facts.getCarbs();
+            total += meal.getTotalCalories();
         }
-        
-        return new NutritionFacts("Итого за день", totalCalories, totalProtein, totalFats, totalCarbs);
+        return total;
     }
     
-    public Meal getMealByType(String type) {
+    /**
+     * Рассчитывает общее количество белков за день
+     */
+    public double getTotalProteins() {
+        double total = 0.0;
         for (Meal meal : meals) {
-            if (meal.getType().equalsIgnoreCase(type)) {
-                return meal;
-            }
+            total += meal.getTotalProteins();
         }
-        return null;
+        return total;
     }
     
+    /**
+     * Рассчитывает общее количество жиров за день
+     */
+    public double getTotalFats() {
+        double total = 0.0;
+        for (Meal meal : meals) {
+            total += meal.getTotalFats();
+        }
+        return total;
+    }
+    
+    /**
+     * Рассчитывает общее количество углеводов за день
+     */
+    public double getTotalCarbs() {
+        double total = 0.0;
+        for (Meal meal : meals) {
+            total += meal.getTotalCarbs();
+        }
+        return total;
+    }
+    
+    /**
+     * Выводит информацию о рационе на день
+     */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("Рацион дня:\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("📅 Рацион на день:\n");
+        
+        // Выводим каждый приём пищи
         for (Meal meal : meals) {
-            sb.append("- ").append(meal).append("\n");
+            sb.append(meal.toString()).append("\n");
         }
         
-        NutritionFacts total = calculateTotalNutrition();
-        sb.append("Суммарно: ").append(total);
+        // Общее КБЖУ за день
+        sb.append(String.format("ИТОГО: %.0f ккал / %.0f г Б / %.0f г Ж / %.0f г У",
+                getTotalCalories(), getTotalProteins(), getTotalFats(), getTotalCarbs()));
+        
         return sb.toString();
     }
 }

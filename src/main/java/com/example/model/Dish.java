@@ -5,72 +5,56 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 
+//блюдо
+/*
+Этот класс :
+Хранит название блюда
+Содержит рецепт (Recipe)
+Рассчитывает КБЖУ на основе ингредиентов
+Выводит информацию о блюде
+* */
 public class Dish {
     private final String name;
-    private final Map<Ingredient, Double> ingredients = new LinkedHashMap<>();
+    private final Recipe recipe;
+    private final int usedPortions;
     
-    public Dish(String name) {
+    public Dish(String name, Recipe recipe, int usedPortions) {
         this.name = Objects.requireNonNull(name);
-    }
-    
-    public void addIngredient(Ingredient ingredient, double grams) {
-        if (grams <= 0) {
-            throw new IllegalArgumentException("Вес ингредиента должен быть больше нуля.");
-        }
-        ingredients.put(ingredient, grams);
-    }
-    
-    public double getCalories() {
-        double total = 0.0;
-        for (Map.Entry<Ingredient, Double> entry : ingredients.entrySet()) {
-            Ingredient ingredient = entry.getKey();
-            double grams = entry.getValue();
-            total += ingredient.getCaloriesPer100g() * grams / 100;
-        }
-        return total;
-    }
-    
-    public double getProteins() {
-        double total = 0.0;
-        for (Map.Entry<Ingredient, Double> entry : ingredients.entrySet()) {
-            Ingredient ingredient = entry.getKey();
-            double grams = entry.getValue();
-            total += ingredient.getProteinsPer100g() * grams / 100;
-        }
-        return total;
-    }
-    
-    public double getFats() {
-        double total = 0.0;
-        for (Map.Entry<Ingredient, Double> entry : ingredients.entrySet()) {
-            Ingredient ingredient = entry.getKey();
-            double grams = entry.getValue();
-            total += ingredient.getFatsPer100g() * grams / 100;
-        }
-        return total;
-    }
-    
-    public double getCarbs() {
-        double total = 0.0;
-        for (Map.Entry<Ingredient, Double> entry : ingredients.entrySet()) {
-            Ingredient ingredient = entry.getKey();
-            double grams = entry.getValue();
-            total += ingredient.getCarbsPer100g() * grams / 100;
-        }
-        return total;
+        this.recipe = Objects.requireNonNull(recipe);
+        this.usedPortions = usedPortions;
     }
     
     public String getName() {
         return name;
     }
     
-    public Map<Ingredient, Double> getIngredients() {
-        return Collections.unmodifiableMap(ingredients);
+    public Recipe getRecipe() {
+        return recipe;
+    }
+    
+    // Расчёт калорий блюда
+    public double getCalories() {
+        return recipe.getTotalCalories(usedPortions);
+    }
+    
+    // Расчёт белков
+    public double getProteins() {
+        return recipe.getTotalProteins(usedPortions);
+    }
+    
+    // Расчёт жиров
+    public double getFats() {
+        return recipe.getTotalFats(usedPortions);
+    }
+    
+    // Расчёт углеводов
+    public double getCarbs() {
+        return recipe.getTotalCarbs(usedPortions);
     }
     
     @Override
     public String toString() {
-        return String.format("%s: %.1f ккал, %.1f Б, %.1f Ж, %.1f У",
+        return String.format("%s: %.0f ккал / %.0f г Б / %.0f г Ж / %.0f г У",
                 name, getCalories(), getProteins(), getFats(), getCarbs());
     }
 }
